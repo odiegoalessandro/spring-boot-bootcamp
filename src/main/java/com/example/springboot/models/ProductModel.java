@@ -2,6 +2,9 @@ package com.example.springboot.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -9,17 +12,13 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "TB_PRODUCTS")
-public class ProductModel implements Serializable {
+public class ProductModel extends RepresentationModel<ProductModel> implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @NotBlank
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID productId;
-
-    @NotBlank
     private String name;
-    @NotBlank
     private BigDecimal value;
 
     public UUID getProductId() {
